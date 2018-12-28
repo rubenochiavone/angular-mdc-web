@@ -3,6 +3,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { environment } from '../environments/environment';
+
 const SMALL_WIDTH_BREAKPOINT = 1240;
 
 import { MdcTopAppBar } from '@angular-mdc/web';
@@ -15,6 +17,7 @@ export class AppLayout implements OnInit, OnDestroy {
   /** Emits whenever the component is destroyed. */
   private _destroy = new Subject<void>();
 
+  version: string = environment.version;
   matcher: MediaQueryList;
 
   @ViewChild('demoTopAppBarControls') demoTopAppBarControls;
@@ -23,7 +26,7 @@ export class AppLayout implements OnInit, OnDestroy {
   startVisible: boolean;
 
   navigationLinks = [
-    { name: 'Button', route: 'button-demo' },
+    { name: 'Button', route: 'button' },
     { name: 'Card', route: 'card-demo' },
     { name: 'Checkbox', route: 'checkbox-demo' },
     { name: 'Chips', route: 'chips-demo' },

@@ -32,42 +32,6 @@
   font-family: 'Roboto', monospace;
 }
 
-.markdown-body {
-  line-height: 1.5;
-  padding-left: 10px;
-
-  h1 {
-    @include mdc-typography(headline4);
-
-    font-weight: 500;
-  }
-
-  h2 {
-    @include mdc-typography(headline5);
-  }
-
-  h4 {
-    @include mdc-typography(body2);
-  }
-
-  h1, h2 {
-    margin: 24px 16px 16px 0;
-    line-height: 1.25;
-    padding-bottom: .3em;
-    border-bottom: 1px solid #eaecef;
-  }
-
-  h3 {
-    font-size: 1.2em;
-    font-weight: 500;
-    margin-bottom: 7px;
-  }
-
-  ul {
-    margin-bottom: 0;
-  }
-}
-
 //
 // API table
 //

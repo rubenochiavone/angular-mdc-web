@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ButtonDemo } from './components/button-demo/button-demo';
 import { CardDemo } from './components/card-demo/card-demo';
 import { CheckboxDemo } from './components/checkbox-demo/checkbox-demo';
 import { ChipsDemo } from './components/chips-demo/chips-demo';
@@ -32,7 +31,6 @@ import { TypographyDemo } from './components/typography-demo/typography-demo';
 
 export const DEMO_DECLARATIONS = [
   TopAppBarDemo,
-  ButtonDemo,
   CardDemo,
   CheckboxDemo,
   ChipsDemo,
@@ -63,7 +61,10 @@ export const DEMO_DECLARATIONS = [
 ];
 
 const routes: Routes = [
-  { path: 'button-demo', component: ButtonDemo },
+  {
+    path: 'button',
+    loadChildren: './components/button/button.module#ButtonModule'
+  },
   { path: 'card-demo', component: CardDemo },
   { path: 'checkbox-demo', component: CheckboxDemo },
   { path: 'chips-demo', component: ChipsDemo },
@@ -96,8 +97,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    useHash: true,
-    scrollPositionRestoration: 'enabled'
+    useHash: true
   })],
   exports: [RouterModule]
 })

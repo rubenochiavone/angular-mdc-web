@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DemoMaterialModule } from './material.module';
+import { SharedModule } from './shared.module';
 
 import { DialogExampleModule } from './components/dialog-demo/dialog-example.module';
 
@@ -28,11 +27,9 @@ export function hljsLanguages() {
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    DemoMaterialModule,
+    SharedModule,
     DialogExampleModule,
     HighlightModule.forRoot({ languages: hljsLanguages })
   ],
