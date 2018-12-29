@@ -13,7 +13,7 @@ const BUTTON_ROUTES: Routes = [
   {
     path: '', component: Button,
     children: [
-      // { path: '', component: ProfileSearch },
+      { path: '', component: Api },
       { path: 'api', component: Api },
       { path: 'examples', component: Examples }
     ]

@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { ComponentViewer, ComponentView } from '../../shared/component-viewer';
 
 @Component({
   templateUrl: './button.html'
 })
 export class Button implements OnInit {
-  tabs: any[];
-  activeTabIndex = 0;
+  @ViewChild(ComponentViewer) _componentViewer: ComponentViewer;
 
-  constructor(private router: Router) {
-    this.tabs = [
-      {
+  ngOnInit(): void {
+    this._componentViewer.componentView = new ComponentView(
+      'Button',
+      'Buttons allow users to take actions, and make choices, with a single tap.',
+      "import { MdcButtonModule } from '@angular-mdc/web';",
+      [{
         label: 'Api',
         route: './api',
         index: 0
@@ -18,15 +21,8 @@ export class Button implements OnInit {
         label: 'Examples',
         route: './examples',
         index: 1
-      },
-    ];
-  }
-
-  ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.activeTabIndex = this.tabs.indexOf(this.tabs.find(tab => tab.route === '.' + this.router.url));
-      console.log(this.activeTabIndex)
-    });
+      }]
+    );
   }
 }
 
