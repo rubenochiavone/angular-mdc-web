@@ -8,6 +8,7 @@ import {
   ElementRef,
   NgZone,
   OnDestroy,
+  Optional,
   QueryList,
   ViewEncapsulation
 } from '@angular/core';
@@ -52,8 +53,8 @@ const INTERACTION_EVENTS = ['click', 'keydown'];
     '[attr.aria-describedby]': 'config?.ariaDescribedBy || null',
   },
   template: `
-  <mdc-dialog-scrim></mdc-dialog-scrim>
   <ng-content></ng-content>
+  <mdc-dialog-scrim></mdc-dialog-scrim>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -67,7 +68,7 @@ export class MdcDialogComponent implements AfterViewInit, OnDestroy {
 
   private _scrollable: boolean = true;
 
-  config: MdcDialogConfig;
+  config?: MdcDialogConfig;
 
   @ContentChild(MdcDialogSurface) _surface!: MdcDialogSurface;
   @ContentChild(MdcDialogContent) _content!: MdcDialogContent;
@@ -86,7 +87,7 @@ export class MdcDialogComponent implements AfterViewInit, OnDestroy {
     return merge(...INTERACTION_EVENTS.map(evt => fromEvent(this._getDialog(), evt)));
   }
 
-  createAdapter() {
+  private _createAdapter() {
     return {
       addClass: (className: string) => this._getDialog().classList.add(className),
       removeClass: (className: string) => this._getDialog().classList.remove(className),
@@ -129,8 +130,16 @@ export class MdcDialogComponent implements AfterViewInit, OnDestroy {
         this._buttons.toArray().reverse();
         this._buttons.forEach(button => button.getHostElement().parentElement!.appendChild(button.getHostElement()));
       },
-      notifyOpened: () => this.dialogRef.opened(),
-      notifyClosed: (action: string) => this._closeDialogByRef(action)
+      notifyOpened: () => {
+        if (this.dialogRef) {
+          this.dialogRef.opened();
+        }
+      },
+      notifyClosed: (action: string) => {
+        if (this.dialogRef) {
+          this.dialogRef.close(action);
+        }
+      }
     };
   }
 
@@ -152,15 +161,23 @@ export class MdcDialogComponent implements AfterViewInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _platform: Platform,
     private _elementRef: ElementRef<HTMLElement>,
-    public dialogRef: MdcDialogRef<MdcDialogComponent>) {
+    @Optional() public dialogRef: MdcDialogRef<MdcDialogComponent>) {
 
-    this.config = dialogRef._portalInstance._config;
+    if (dialogRef) {
+      this.config = dialogRef._portalInstance._config;
+    }
   }
 
   ngAfterViewInit(): void {
-    this._foundation = new MDCDialogFoundation(this.createAdapter());
-    this._initialize();
+    this._foundation = new MDCDialogFoundation(this._createAdapter());
 
+    if (this.dialogRef) {
+      this._initialize();
+      this.open();
+    }
+  }
+
+  open(): void {
     this._loadListeners();
     this._focusTrap = createFocusTrapInstance(this._getDialog(),
       this._focusTrapFactory, this._getDefaultButton());
@@ -205,18 +222,14 @@ export class MdcDialogComponent implements AfterViewInit, OnDestroy {
     return defaultBtn ? defaultBtn.getHostElement() : undefined;
   }
 
-  private _closeDialogByRef(action?: string): void {
-    this.dialogRef.close(action);
-  }
-
   private _loadListeners(): void {
-    this._layoutEventSubscription = this.layoutEvents.pipe()
-      .subscribe(() =>
-        this._ngZone.runOutsideAngular(() => this._foundation.layout()));
+    this._ngZone.runOutsideAngular(() =>
+      this.layoutEvents.pipe(takeUntil(this._destroy))
+        .subscribe(() => this._ngZone.run(() => this._foundation.layout())));
 
-    this._interactionEventSubscription = this.interactionEvents.pipe()
-      .subscribe(evt => this._ngZone.runOutsideAngular(() =>
-        this._foundation.handleInteraction(evt)));
+    this._ngZone.runOutsideAngular(() =>
+      this.interactionEvents.pipe(takeUntil(this._destroy))
+        .subscribe(evt => this._ngZone.run(() => this._foundation.handleInteraction(evt))));
 
     if (this._platform.isBrowser) {
       this._ngZone.runOutsideAngular(() =>
