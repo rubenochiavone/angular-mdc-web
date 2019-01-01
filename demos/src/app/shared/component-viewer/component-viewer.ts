@@ -13,14 +13,26 @@ interface Tabs {
 export class ComponentView {
   name: string;
   description: string;
-  importCode: string;
-  tabs?: Tabs[];
   references?: Reference[];
+  importCode: string;
+  tabs = [{
+    label: 'Api',
+    route: './api'
+  }, {
+    label: 'Sass Mixins',
+    route: './sass'
+  }, {
+    label: 'Examples',
+    route: './examples'
+  }];
 
-  constructor(name: string, description: string, importCode: string) {
+  constructor(name: string, description: string, importCode: string, tabs?: Tabs[]) {
     this.name = name;
     this.description = description;
     this.importCode = importCode;
+    if (tabs) {
+      this.tabs = tabs;
+    }
   }
 }
 

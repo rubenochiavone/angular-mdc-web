@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   startVisible: boolean;
 
   navigationLinks = [
-    { name: 'Button', route: 'button' },
+    { name: 'Button', route: 'button-demo' },
     { name: 'Card', route: 'card-demo' },
     { name: 'Checkbox', route: 'checkbox-demo' },
     { name: 'Chips', route: 'chips-demo' },

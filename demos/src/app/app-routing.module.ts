@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CardDemo } from './components/card-demo/card-demo';
-import { CheckboxDemo } from './components/checkbox-demo/checkbox-demo';
 import { ChipsDemo } from './components/chips-demo/chips-demo';
 import { DialogDemo } from './components/dialog-demo/dialog-demo';
 import { DrawerDemo } from './components/drawer-demo/drawer-demo';
@@ -32,7 +31,6 @@ import { TypographyDemo } from './components/typography-demo/typography-demo';
 export const DEMO_DECLARATIONS = [
   TopAppBarDemo,
   CardDemo,
-  CheckboxDemo,
   ChipsDemo,
   DialogDemo,
   DrawerDemo,
@@ -62,11 +60,14 @@ export const DEMO_DECLARATIONS = [
 
 const routes: Routes = [
   {
-    path: 'button',
+    path: 'button-demo',
     loadChildren: './components/button-demo/button.module#ButtonModule'
   },
   { path: 'card-demo', component: CardDemo },
-  { path: 'checkbox-demo', component: CheckboxDemo },
+  {
+    path: 'checkbox-demo',
+    loadChildren: './components/checkbox-demo/checkbox.module#CheckboxModule'
+  },
   { path: 'chips-demo', component: ChipsDemo },
   { path: 'dialog-demo', component: DialogDemo },
   { path: 'drawer-demo', component: DrawerDemo },

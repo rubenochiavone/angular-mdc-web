@@ -9,7 +9,7 @@ export class Api { }
 export class Sass { }
 
 @Component({ template: '<component-viewer></component-viewer>' })
-export class Button implements OnInit {
+export class ButtonDemo implements OnInit {
   @ViewChild(ComponentViewer) _componentViewer: ComponentViewer;
 
   ngOnInit(): void {
@@ -17,17 +17,6 @@ export class Button implements OnInit {
       'Button',
       'Buttons allow users to take actions, and make choices, with a single tap.',
       "import { MdcButtonModule } from '@angular-mdc/web';");
-
-    this._componentViewer.componentView.tabs = [{
-      label: 'Api',
-      route: './api'
-    }, {
-      label: 'Sass Mixins',
-      route: './sass'
-    }, {
-      label: 'Examples',
-      route: './examples'
-    }];
 
     this._componentViewer.componentView.references = [{
       name: 'Material Design guidelines: Buttons',
@@ -48,7 +37,7 @@ export class Examples {
 
 <button mdc-button secondary>Secondary Color</button>
 
-<a mdc-button primary raised href="#/button/examples">Href link</a>`;
+<a mdc-button primary raised href="#/button-demo/examples">Href link</a>`;
 
   exampleRowTwo = `<button mdc-button>
   <mdc-icon>favorite</mdc-icon>Icon

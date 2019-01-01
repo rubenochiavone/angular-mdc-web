@@ -11,4 +11,4 @@ import { RoutingModule, ROUTE_DECLARATIONS } from './routing.module';
   ],
   declarations: [ROUTE_DECLARATIONS]
 })
-export class ButtonModule { }
+export class CheckboxModule { }
