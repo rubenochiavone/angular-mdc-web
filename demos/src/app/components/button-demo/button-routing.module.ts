@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Button, Api, Examples } from './button';
+import { Api, Examples, Sass, Button } from './button-demo';
 
 export const ROUTE_DECLARATIONS = [
   Api,
   Examples,
+  Sass,
   Button
 ];
 
@@ -13,8 +14,9 @@ const BUTTON_ROUTES: Routes = [
   {
     path: '', component: Button,
     children: [
-      { path: '', component: Api },
+      { path: '', redirectTo: 'api' },
       { path: 'api', component: Api },
+      { path: 'sass', component: Sass },
       { path: 'examples', component: Examples }
     ]
   }

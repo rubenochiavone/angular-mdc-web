@@ -52,13 +52,17 @@
   overflow: hidden;
 }
 
+.demo-panel-section {
+  width: 100%;
+  max-width: 100%;
+}
+
 .demo-panel-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   height: 100%;
-  padding: 40px 16px 100px;
   max-width: 100%;
   width: 100%;
   overflow: auto;
@@ -67,23 +71,23 @@
 .demo-panel-transition {
   width: 100%;
   max-width: 900px;
-}
 
-.demo-panel-header {
-  margin: 24px 16px 16px 0;
-  line-height: 1.25;
-  padding-bottom: .3em;
-  border-bottom: 1px solid #eaecef;
+  h1, h2 {
+    margin: 24px 16px 16px 0;
+    line-height: 1.25;
+    padding-bottom: .3em;
+    border-bottom: 1px solid #eaecef;  
+  }
 
-  h1 & + {
+  h1 {
     @include mdc-typography(headline4);
 
     font-weight: 500;  
   }
-}
 
-h2 + .demo-panel-header {
-  @include mdc-typography(headline5);
+  h2 {
+    @include mdc-typography(headline5);
+  }
 }
 
 .demo-panel-references {
@@ -101,14 +105,19 @@ h2 + .demo-panel-header {
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 1rem;
   min-width: 200px;
+}
+
+.hljs {
+  border-radius: .45rem;
+  padding: 9px;
 }
 
 .demo-content {
   border: 1px solid rgba(0, 0, 0, .15);
   border-radius: .75rem;
-  margin: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
   padding: 1rem;
 
   &__headline {

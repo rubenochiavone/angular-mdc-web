@@ -1,16 +1,3 @@
-.docs-api-module-import {
-  display: inline-flex;
-  background: rgba(0, 0, 0, .06);
-  font-size: 15px;
-  word-break: break-word;
-  padding: 3px;
-}
-
-.docs-api-class-selector-label {
-  word-break: break-word;
-  font-size: 15px;
-}
-
 .docs-api-class-selector-name {
   background: rgba(0, 0, 0, .06);
   margin-left: 3px;
@@ -36,34 +23,30 @@
 // API table
 //
 
-.docs-api table {
-  border: 1px solid #eee;
-  border-collapse: collapse;
-  border-spacing: 0;
+.docs-api  {
+  margin-bottom: 60px;
 
-  td, th {
+  h4 {
+    font-size: 1rem;
+  }
+
+  table {
     border: 1px solid #eee;
-    padding: 12px;
-  }
-
-  td:first-child, th:first-child {
-    border-left: none;
-  }
-
-  td:last-child, th:last-child {
-    border-right: none;
+    border-collapse: collapse;
+    border-spacing: 0;
   }
 
   th {
-    background: rgba(60, 133, 248, .08);
-    border-top: none;
-    font-weight: 400;
-    font-size: 15px;
-    text-align: left;
+    @include mdc-typography(subtitle2);
   }
 
-  tr:last-child > td {
-    border-bottom: none;
+  tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+
+  td, th {
+    border: 1px solid #dfe2ef;
+    padding: 12px;
   }
 
   td {

@@ -63,7 +63,7 @@ export const DEMO_DECLARATIONS = [
 const routes: Routes = [
   {
     path: 'button',
-    loadChildren: './components/button/button.module#ButtonModule'
+    loadChildren: './components/button-demo/button.module#ButtonModule'
   },
   { path: 'card-demo', component: CardDemo },
   { path: 'checkbox-demo', component: CheckboxDemo },

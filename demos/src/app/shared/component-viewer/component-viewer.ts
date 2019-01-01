@@ -1,23 +1,26 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
 
-class Tabs {
+interface Reference {
+  name: string;
+  url: string;
+}
+
+interface Tabs {
   label: string;
   route: string;
-  index: number;
 }
 
 export class ComponentView {
   name: string;
   description: string;
   importCode: string;
-  tabs: Tabs[];
+  tabs?: Tabs[];
+  references?: Reference[];
 
-  constructor(name: string, description: string, importCode: string, tabs?: Tabs[]) {
+  constructor(name: string, description: string, importCode: string) {
     this.name = name;
     this.description = description;
     this.importCode = importCode;
-    this.tabs = tabs;
   }
 }
 
@@ -26,17 +29,6 @@ export class ComponentView {
   templateUrl: './component-viewer.html',
   encapsulation: ViewEncapsulation.None
 })
-export class ComponentViewer implements OnInit {
-  activeTabIndex = 0;
+export class ComponentViewer {
   componentView: ComponentView;
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-    this.router.events.subscribe((res) => {
-      this.activeTabIndex = this.componentView.tabs.indexOf(this.componentView.tabs.find(tab =>
-        tab.route === '.' + this.router.url));
-      console.log(this.activeTabIndex);
-    });
-  }
 }

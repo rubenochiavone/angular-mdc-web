@@ -10,9 +10,12 @@ import xml from 'highlight.js/lib/languages/xml';
 
 import { MaterialModule } from './material.module';
 import { ComponentViewer } from './shared/component-viewer';
+import { ExampleViewer } from './shared/example-viewer';
+import { ActiveTabRouterModule } from './shared/active-tab-router';
 
 const SHARED_DECLARATIONS = [
-  ComponentViewer
+  ComponentViewer,
+  ExampleViewer
 ];
 
 export function hljsLanguages() {
@@ -30,6 +33,7 @@ export function hljsLanguages() {
     MaterialModule,
     ReactiveFormsModule,
     RouterModule,
+    ActiveTabRouterModule,
     HighlightModule.forRoot({ languages: hljsLanguages })
   ],
   declarations: [SHARED_DECLARATIONS],
@@ -38,6 +42,7 @@ export function hljsLanguages() {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    ActiveTabRouterModule,
     SHARED_DECLARATIONS
   ]
 })
