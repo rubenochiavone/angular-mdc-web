@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { MdcButton, MdcIcon, MdcIconModule, MdcButtonModule } from '@angular-mdc/web';
+import { MdcButton, MdcButtonLabel, MdcIcon, MdcIconModule, MdcButtonModule } from '@angular-mdc/web';
 
 describe('MdcButton', () => {
   let fixture: ComponentFixture<any>;
@@ -13,7 +13,9 @@ describe('MdcButton', () => {
       declarations: [
         SimpleButton,
         HrefButton,
-        SimpleButtonWithIcon
+        SimpleButtonWithIcon,
+        SimpleButtonWithTrailingIcon,
+        ButtonWithTrailingIcon
       ]
     });
     TestBed.compileComponents();
@@ -173,6 +175,29 @@ describe('MdcButton', () => {
       expect(buttonDebugElement.nativeElement.classList.contains('mdc-button__icon')).toBe(true);
     });
   });
+
+  // Trailing icon button tests
+  describe('mdc-button with trailing icon', () => {
+    let buttonLabelDebugElement: DebugElement;
+
+    it('#should have class mdc-button__label when using MdcButtonLabel attr', () => {
+      fixture = TestBed.createComponent(SimpleButtonWithTrailingIcon);
+      fixture.detectChanges();
+
+      buttonLabelDebugElement = fixture.debugElement.query(By.directive(MdcButtonLabel));
+
+      expect(buttonLabelDebugElement.nativeElement.classList.contains('mdc-button__label')).toBe(true);
+    });
+
+    it('#should have class mdc-button__label when using MdcButtonLabel element', () => {
+      fixture = TestBed.createComponent(ButtonWithTrailingIcon);
+      fixture.detectChanges();
+
+      buttonLabelDebugElement = fixture.debugElement.query(By.directive(MdcButtonLabel));
+
+      expect(buttonLabelDebugElement.nativeElement.classList.contains('mdc-button__label')).toBe(true);
+    });
+  });
 });
 
 /** Simple component for testing. */
@@ -225,3 +250,23 @@ class HrefButton {
   `,
 })
 class SimpleButtonWithIcon { }
+
+@Component({
+  template: `
+    <button mdc-button>
+      <span mdc-button-label>Search</span>
+      <mdc-icon>search</mdc-icon>
+    </button>
+  `,
+})
+class SimpleButtonWithTrailingIcon { }
+
+@Component({
+  template: `
+    <button mdc-button>
+      <mdc-button-label>Search</mdc-button-label>
+      <mdc-icon>search</mdc-icon>
+    </button>
+  `,
+})
+class ButtonWithTrailingIcon { }

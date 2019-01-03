@@ -112,4 +112,21 @@ export class Examples {
   @include mdc-button-shape-radius(8px);
 }`
   };
+
+  trailingIconExample = {
+    html: `<button mdc-button>
+  <span mdc-button-label>Trailing Icon</span>
+  <mdc-icon>favorite</mdc-icon>
+</button>
+
+<button mdc-button secondary raised>
+  <span mdcButtonLabel>Trailing Icon</span>
+  <mdc-icon>favorite</mdc-icon>
+</button>
+
+<button mdc-button outlined>
+  <mdc-button-label>Trailing Icon</mdc-button-label>
+  <mdc-icon>favorite</mdc-icon>
+</button>`
+  };
 }

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  Directive,
   ElementRef,
   Input,
   OnDestroy,
@@ -11,6 +12,15 @@ import {
 import { toBoolean } from '@angular-mdc/web/common';
 import { MdcRipple } from '@angular-mdc/web/ripple';
 import { MdcIcon } from '@angular-mdc/web/icon';
+
+@Directive({
+  selector: 'mdc-button-label, [mdc-button-label], [mdcButtonLabel]',
+  exportAs: 'mdcButtonLabel',
+  host: {
+    'class': 'mdc-button__label'
+ }
+})
+export class MdcButtonLabel { }
 
 @Component({
   moduleId: module.id,

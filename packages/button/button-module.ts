@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { MdcButton } from './button';
+import { MdcButton, MdcButtonLabel } from './button';
 
 @NgModule({
-  exports: [MdcButton],
-  declarations: [MdcButton]
+  exports: [MdcButton, MdcButtonLabel],
+  declarations: [MdcButton, MdcButtonLabel]
 })
 export class MdcButtonModule { }
