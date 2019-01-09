@@ -14,7 +14,7 @@ import { MdcRipple } from '@angular-mdc/web/ripple';
 import { MdcIcon } from '@angular-mdc/web/icon';
 
 @Directive({
-  selector: 'mdc-button-label, [mdc-button-label], [mdcButtonLabel]',
+  selector: 'mdc-button-label, [mdcButtonLabel]',
   exportAs: 'mdcButtonLabel',
   host: {
     'class': 'mdc-button__label'
@@ -37,7 +37,10 @@ export class MdcButtonLabel { }
     '[class.mdc-button--outlined]': 'outlined',
     '(click)': 'onClick($event)'
   },
-  template: '<ng-content></ng-content>',
+  template: `
+  <mdc-button-label *ngIf="label">{{label}}</mdc-button-label>
+  <ng-content></ng-content>
+  `,
   providers: [MdcRipple],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -93,6 +96,8 @@ export class MdcButton implements OnInit, OnDestroy {
   private _disabled: boolean = false;
 
   @ContentChild(MdcIcon) _icon!: MdcIcon;
+
+  @Input() label?: string;
 
   constructor(
     public elementRef: ElementRef<HTMLElement>,
