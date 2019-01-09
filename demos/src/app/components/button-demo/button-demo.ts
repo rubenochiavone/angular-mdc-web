@@ -114,17 +114,17 @@ export class Examples {
   };
 
   trailingIconExample = {
-    html: `<button mdc-button label="Trailing Icon">
-  <mdc-icon>favorite</mdc-icon>
-</button>
-
-<button mdc-button secondary raised>
+    html: `<button mdc-button>
   <span mdcButtonLabel>Trailing Icon</span>
   <mdc-icon>favorite</mdc-icon>
 </button>
 
-<button mdc-button outlined>
+<button mdc-button secondary raised>
   <mdc-button-label>Trailing Icon</mdc-button-label>
+  <mdc-icon>favorite</mdc-icon>
+</button>
+
+<button mdc-button outlined label="Trailing Icon">
   <mdc-icon>favorite</mdc-icon>
 </button>`
   };
